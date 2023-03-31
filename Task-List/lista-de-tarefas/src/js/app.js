@@ -10,10 +10,11 @@ function salvartarefas() {
 	const listastarefas = [];
 
 	for (let tarefa of litarefa) {
-		listastarefas.push(tarefa.innerText.replace('Deletar', '').trim());
+		listastarefas.push(tarefa.innerText.replace('Deletar', '').trim().toString());
 	}
 	const tarefaJson = JSON.stringify(listastarefas);
-	localStorage.setItem('tarefas', listastarefas);
+	localStorage.setItem('tasks', tarefaJson);
+
 }
 
 
@@ -63,14 +64,14 @@ time.addEventListener('keypress', function (e) {
 	}
 });
 
-// RESOLVER AQUE ESTA EM BAIXO
 function adicionatarefas() {
-	const tarefas = localStorage.getItem('tarefas');
-	const listaTarefas = JSON.parse(tarefas);
+	const lista_de_itens = localStorage.getItem('tasks');
+	let tarefas = JSON.parse(lista_de_itens);
 
-	for (let tarefa of listaTarefas) {
-		criarlistatarefas(tarefa);
-	};
+	for (let i in tarefas) {
+		console.log(tarefas[i]);
+		criarlistatarefas(tarefas[i]);
+	}
 }
 
 adicionatarefas();
